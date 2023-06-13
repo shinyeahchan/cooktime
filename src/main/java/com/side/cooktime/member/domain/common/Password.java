@@ -1,9 +1,9 @@
-package com.side.cooktime.domain.member.info;
+package com.side.cooktime.member.domain.common;
 
 public class Password {
     private final String password;
 
-    public Password(String password) {
+    public Password(final String password) {
         this.password = password;
     }
 }
