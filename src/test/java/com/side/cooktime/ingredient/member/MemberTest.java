@@ -1,9 +1,9 @@
-package com.side.cooktime.domain.member;
+package com.side.cooktime.ingredient.member;
 
-import com.side.cooktime.member.domain.Member;
-import com.side.cooktime.member.domain.admin.Admin;
-import com.side.cooktime.member.domain.user.Gender;
-import com.side.cooktime.member.domain.user.User;
+import com.side.cooktime.domain.member.model.Member;
+import com.side.cooktime.domain.member.model.Admin;
+import com.side.cooktime.domain.member.model.Gender;
+import com.side.cooktime.domain.member.model.User;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

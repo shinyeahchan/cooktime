@@ -1,4 +1,4 @@
-package com.side.cooktime.member.domain.user;
+package com.side.cooktime.domain.member.model;
 
 public enum Gender {
     MALE("MALE"), FEMALE("FEMALE");

@@ -1,4 +1,4 @@
-package com.side.cooktime.member.domain.common;
+package com.side.cooktime.domain.member.model;
 
 public class Password {
     private final String password;
@@ -6,4 +6,5 @@ public class Password {
     public Password(final String password) {
         this.password = password;
     }
+
 }

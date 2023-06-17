@@ -1,6 +1,4 @@
-package com.side.cooktime.member.domain.user;
-
-import com.side.cooktime.member.domain.Member;
+package com.side.cooktime.domain.member.model;
 
 public class User extends Member {
     private final Gender gender;
@@ -13,13 +11,4 @@ public class User extends Member {
         this.age = new Age(age);
     }
 
-    @Override
-    public boolean isUser() {
-        return true;
-    }
-
-    @Override
-    public boolean isAdmin() {
-        return false;
-    }
 }

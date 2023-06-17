@@ -1,4 +1,4 @@
-package com.side.cooktime.member.domain.common;
+package com.side.cooktime.domain.member.model;
 
 public class Email {
     private final String email;
