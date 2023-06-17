@@ -1,7 +1,5 @@
 package com.side.cooktime.domain.member.model;
 
-import com.side.cooktime.domain.model.Validator;
-
 public class Name {
     private final String firstName;
     private final String lastName;
@@ -13,6 +11,8 @@ public class Name {
     }
 
     private void validate(String firstName) {
-        Validator.notBlank(firstName, "First Name");
+        if (firstName == null || firstName.isBlank()) {
+            throw new IllegalArgumentException("First Name is cannot be null or empty");
+        }
     }
 }

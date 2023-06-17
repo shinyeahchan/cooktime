@@ -1,7 +1,5 @@
 package com.side.cooktime.domain.member.model;
 
-import com.side.cooktime.domain.model.Validator;
-
 public class Age {
     private final int age;
 
@@ -11,6 +9,8 @@ public class Age {
     }
 
     private void validate(int age) {
-        Validator.positive(age, "Age");
+        if (age <= 0) {
+            throw new IllegalArgumentException("Age must be positive value");
+        }
     }
 }
