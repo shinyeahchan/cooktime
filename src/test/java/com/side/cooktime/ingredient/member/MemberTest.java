@@ -14,32 +14,53 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MemberTest {
 
     @Test
-    public void 생성() {
-        Member member1 = new User("user@gmail.com", "password1234", "예찬", "신", Gender.MALE, 30);
-        Member member2 = new Admin("admin@gmail.com", "password1234", "길동", "홍");
+    public void user_생성() {
+        Member member = new User("user@gmail.com", "password1234", "길동", "홍", Gender.MALE, 30);
         assertAll(
-                () -> assertThat(member1 instanceof User).isTrue(),
-                () -> assertThat(member1 instanceof Admin).isFalse(),
-                () -> assertThat(member2 instanceof User).isFalse(),
-                () -> assertThat(member2 instanceof Admin).isTrue()
+                () -> assertThat(member instanceof User).isTrue(),
+                () -> assertThat(member instanceof Admin).isFalse()
         );
     }
 
     @Test
-    void 유효성검사() {
+    public void admin_생성() {
+        Member member = new Admin("admin@gmail.com", "password1234", "길동", "홍");
+        assertAll(
+                () -> assertThat(member instanceof User).isFalse(),
+                () -> assertThat(member instanceof Admin).isTrue()
+        );
+    }
+
+    @Test
+    void email_유효성검사() {
         assertAll(
                 () -> assertThatThrownBy(() -> new User(null, "password1234", "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
                 () -> assertThatThrownBy(() -> new User("", "password1234", "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
                 () -> assertThatThrownBy(() -> new User("user", "password1234", "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new User("user@", "password1234", "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> new User("user@", "password1234", "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
+    @Test
+    void password_유효성검사() {
+        assertAll(
                 () -> assertThatThrownBy(() -> new User("user@gmail.com", null, "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
                 () -> assertThatThrownBy(() -> new User("user@gmail.com", "", "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new User("user@gmail.com", "shortPw", "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> new User("user@gmail.com", "shortPw", "길동", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
+    @Test
+    void firstName_유효성검사() {
+        assertAll(
                 () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", null, "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", "", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", "", "홍", Gender.MALE, 30)).isInstanceOf(IllegalArgumentException.class)
+        );
+    }
 
+    @Test
+    void age_유효성검사() {
+        assertAll(
                 () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", "길동", "홍", Gender.MALE, 0)).isInstanceOf(IllegalArgumentException.class),
                 () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", "길동", "홍", Gender.MALE, -1)).isInstanceOf(IllegalArgumentException.class)
         );
