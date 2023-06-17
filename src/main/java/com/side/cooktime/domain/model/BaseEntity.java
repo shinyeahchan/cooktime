@@ -1,12 +1,14 @@
-package com.side.cooktime.domain.common;
-
-import java.sql.Time;
+package com.side.cooktime.domain.model;
 
 public abstract class BaseEntity {
 
     protected Timestamp timestamp;
 
-    public BaseEntity() {
+    protected BaseEntity() {
         this.timestamp = new Timestamp();
+    }
+
+    protected void update(){
+
     }
 }

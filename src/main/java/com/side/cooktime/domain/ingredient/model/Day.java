@@ -1,4 +1,4 @@
-package com.side.cooktime.domain.common;
+package com.side.cooktime.domain.ingredient.model;
 
 public class Day {
 

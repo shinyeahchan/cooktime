@@ -1,9 +1,9 @@
-package com.side.cooktime.member.domain;
+package com.side.cooktime.domain.member.model;
 
-import com.side.cooktime.domain.common.BaseEntity;
-import com.side.cooktime.member.domain.common.Email;
-import com.side.cooktime.member.domain.common.Name;
-import com.side.cooktime.member.domain.common.Password;
+import com.side.cooktime.domain.member.model.Email;
+import com.side.cooktime.domain.member.model.Password;
+import com.side.cooktime.domain.member.model.Name;
+import com.side.cooktime.domain.model.BaseEntity;
 
 public abstract class Member extends BaseEntity {
 
@@ -19,7 +19,4 @@ public abstract class Member extends BaseEntity {
         this.name = new Name(firstName, lastName);
     }
 
-    public abstract boolean isAdmin();
-
-    public abstract boolean isUser();
 }

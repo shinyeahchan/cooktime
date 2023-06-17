@@ -1,8 +1,8 @@
-package com.side.cooktime.domain.category;
+package com.side.cooktime.domain.category.model;
 
-import com.side.cooktime.domain.common.BaseEntity;
-import com.side.cooktime.domain.common.Name;
-import com.side.cooktime.domain.ingredient.Ingredient;
+import com.side.cooktime.domain.model.BaseEntity;
+import com.side.cooktime.domain.ingredient.model.Name;
+import com.side.cooktime.domain.ingredient.model.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
