@@ -1,9 +1,8 @@
 package com.side.cooktime.domain.member.model;
 
-import com.side.cooktime.domain.member.model.Email;
-import com.side.cooktime.domain.member.model.Password;
-import com.side.cooktime.domain.member.model.Name;
 import com.side.cooktime.domain.model.BaseEntity;
+
+import java.util.Arrays;
 
 public abstract class Member extends BaseEntity {
 
@@ -18,5 +17,4 @@ public abstract class Member extends BaseEntity {
         this.password = new Password(password);
         this.name = new Name(firstName, lastName);
     }
-
 }
