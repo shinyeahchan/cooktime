@@ -1,5 +1,6 @@
 package com.side.cooktime.domain.ingredient.model;
 
+
 public enum Storage {
     COLD("COLD"), FREEZE("FREEZE"), ROOM("ROOM");
 

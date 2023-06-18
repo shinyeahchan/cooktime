@@ -1,10 +1,16 @@
 package com.side.cooktime.domain.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
 import java.time.LocalDateTime;
 
+@Embeddable
 public class Timestamp {
 
+    @Column(updatable = false)
     private LocalDateTime createdAt;
+    @Column()
     private LocalDateTime updatedAt;
 
     protected Timestamp(){
