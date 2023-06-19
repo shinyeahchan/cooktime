@@ -25,11 +25,11 @@ public class Email {
 
     private void validate(String email) {
         if (email == null || email.isBlank()) {
-            throw new IllegalArgumentException("Email is cannot be null or empty");
+            throw new IllegalArgumentException("이메일(email) 값이 공백이거나 Null 값입니다.");
         }
 
         if (!Pattern.compile(EMAIL_REGEX).matcher(email).matches()) {
-            throw new IllegalArgumentException("Email is invalid format");
+            throw new IllegalArgumentException("올바른 이메일(email) 값이 아닙니다.");
         }
     }
 }

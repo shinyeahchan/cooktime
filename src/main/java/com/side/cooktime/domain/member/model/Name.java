@@ -21,7 +21,7 @@ public class Name {
 
     private void validate(String firstName) {
         if (firstName == null || firstName.isBlank()) {
-            throw new IllegalArgumentException("First Name is cannot be null or empty");
+            throw new IllegalArgumentException("이름(FirstName)이 공백이거나 Null 값입니다.");
         }
     }
 }

@@ -21,10 +21,10 @@ public class Password {
 
     private void validate(String password) {
         if (password == null || password.isBlank()) {
-            throw new IllegalArgumentException("Password is cannot be null or empty");
+            throw new IllegalArgumentException("비밀번호(Password)가 공백이거나 Null 값입니다.");
         }
         if (password.length() < MINIMUM_LENGTH) {
-            throw new IllegalArgumentException("Password must be at least " + MINIMUM_LENGTH + " characters long");
+            throw new IllegalArgumentException("비밀번호(Password)가 " + MINIMUM_LENGTH + "자 미만 값입니다.");
         }
     }
 

@@ -17,8 +17,8 @@ public class Age {
     }
 
     private void validate(int age) {
-        if (age <= 0) {
-            throw new IllegalArgumentException("Age must be positive value");
+        if (age < 0) {
+            throw new IllegalArgumentException("나이(Age)가 0 미만 값입니다.");
         }
     }
 }
