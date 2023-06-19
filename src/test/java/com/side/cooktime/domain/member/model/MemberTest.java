@@ -1,15 +1,10 @@
-package com.side.cooktime.domain.member;
+package com.side.cooktime.domain.member.model;
 
-import com.side.cooktime.domain.member.model.Member;
-import com.side.cooktime.domain.member.model.Admin;
-import com.side.cooktime.domain.member.model.Gender;
-import com.side.cooktime.domain.member.model.User;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MemberTest {
 

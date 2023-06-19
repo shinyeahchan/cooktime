@@ -1,8 +1,17 @@
 package com.side.cooktime.domain.member.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Name {
-    private final String firstName;
-    private final String lastName;
+    @Column(name = "first_name", length = 50, nullable = false)
+    private String firstName;
+    @Column(name = "last_name", length = 50)
+    private String lastName;
 
     protected Name(final String firstName, final String lastName) {
         validate(firstName);
