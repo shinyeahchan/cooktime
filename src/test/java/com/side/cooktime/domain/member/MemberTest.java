@@ -1,4 +1,4 @@
-package com.side.cooktime.ingredient.member;
+package com.side.cooktime.domain.member;
 
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.member.model.Admin;
