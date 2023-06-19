@@ -56,8 +56,8 @@ class MemberTest {
     @Test
     void age_유효성검사() {
         assertAll(
-                () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", "길동", "홍", Gender.MALE, 0)).isInstanceOf(IllegalArgumentException.class),
-                () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", "길동", "홍", Gender.MALE, -1)).isInstanceOf(IllegalArgumentException.class)
+                () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", "길동", "홍", Gender.MALE, -1)).isInstanceOf(IllegalArgumentException.class),
+                () -> assertThatThrownBy(() -> new User("user@gmail.com", "password1234", "길동", "홍", Gender.MALE, -10)).isInstanceOf(IllegalArgumentException.class)
         );
     }
 }
