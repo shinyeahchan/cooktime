@@ -1,9 +1,16 @@
 package com.side.cooktime.domain.member.model;
 
-public class User extends Member {
-    private final Gender gender;
+import jakarta.persistence.*;
 
-    private final Age age;
+@Entity
+@Table(name = "member")
+@DiscriminatorValue("U")
+public class User extends Member {
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
+    @Embedded
+    private Age age;
 
     public User(final String email, final String password, final String firstName, final String lastName, final Gender gender, final int age) {
         super(email, password, firstName, lastName);
@@ -11,4 +18,7 @@ public class User extends Member {
         this.age = new Age(age);
     }
 
+    protected User() {
+        ;
+    }
 }
