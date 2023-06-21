@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Password {
+
     @Transient
-    private final int MINIMUM_LENGTH = 8;
+    private static final int MINIMUM_LENGTH = 8;
+
     @Column(name = "password", nullable = false)
     private String password;
 

@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role")
 public abstract class Member extends BaseEntity {
+
     @Embedded
     protected Email email;
     @Embedded
