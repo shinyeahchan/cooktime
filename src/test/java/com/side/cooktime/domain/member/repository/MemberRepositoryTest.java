@@ -1,38 +1,48 @@
 package com.side.cooktime.domain.member.repository;
 
-import com.side.cooktime.domain.member.model.Admin;
-import com.side.cooktime.domain.member.model.Gender;
-import com.side.cooktime.domain.member.model.Member;
-import com.side.cooktime.domain.member.model.User;
+import com.side.cooktime.domain.member.model.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class MemberRepositoryTest {
     @Autowired
     private MemberRepository memberRepository;
 
-    @Test
-    public void testSaveAndFindMember() {
-        // Given
-        String email = "test@gmail.com";
-        String password = "password123";
-        String firstName = "길동";
-        String lastName = "홍";
-        Member member = new User(email, password, firstName, lastName, Gender.MALE, 30);
+    public static final Member member = new User("test@gmail.com", "password123", "길동", "홍", Gender.MALE, 30);
 
-        // When
+    @BeforeEach
+    void setUp() {
         memberRepository.save(member);
+    }
 
-        // Then
-        Member savedMember = memberRepository.findById(1L).orElse(null);
+    @AfterEach
+    void end() {
+        memberRepository.delete(member);
+    }
+
+    @Test
+    public void MEMBER_저장_확인() {
+        Member savedMember = memberRepository.findByEmail(new Email("test@gmail.com")).orElse(null);
         assertAll(
                 () -> assertNotNull(savedMember),
                 () -> assertTrue(savedMember instanceof User),
                 () -> assertFalse(savedMember instanceof Admin)
         );
     }
+
+    @Test
+    public void MEMBER_email_중복시() {
+        //TODO : 추후 email 중복 검사 로직 및 예외처리 진행 예정
+        assertThrows(DataIntegrityViolationException.class, () -> memberRepository.save(member));
+    }
+
 }
