@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "member")
 @DiscriminatorValue("U")
 public class User extends Member {
+
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender;

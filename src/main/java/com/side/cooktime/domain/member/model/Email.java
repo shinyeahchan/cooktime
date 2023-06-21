@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Email {
+
     @Transient
     private final String EMAIL_REGEX = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
 

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Age {
+
     @Column(name = "age")
     private int age;
 

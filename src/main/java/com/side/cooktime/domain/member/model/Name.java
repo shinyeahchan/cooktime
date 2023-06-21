@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Name {
+
     @Column(name = "first_name", length = 50, nullable = false)
     private String firstName;
     @Column(name = "last_name", length = 50)
