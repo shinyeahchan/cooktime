@@ -40,9 +40,10 @@ class MemberRepositoryTest {
     }
 
     @Test
-    public void MEMBER_email_중복시() {
+    public void MEMBER_저장_email_중복시() {
         //TODO : 추후 email 중복 검사 로직 및 예외처리 진행 예정
-        assertThrows(DataIntegrityViolationException.class, () -> memberRepository.save(member));
+        Member member2 = new User("test@gmail.com", "password222", "수정", "김", Gender.FEMALE, 25);
+        assertThrows(DataIntegrityViolationException.class, () -> memberRepository.save(member2));
     }
 
 }
