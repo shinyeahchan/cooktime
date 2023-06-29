@@ -31,7 +31,7 @@ class MemberRepositoryTest {
 
     @Test
     public void MEMBER_저장_확인() {
-        Member savedMember = memberRepository.findByEmail(new Email("test@gmail.com")).orElse(null);
+        Member savedMember = memberRepository.findByEmail("test@gmail.com").orElse(null);
         assertAll(
                 () -> assertNotNull(savedMember),
                 () -> assertTrue(savedMember instanceof User),
