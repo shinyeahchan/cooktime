@@ -1,4 +1,4 @@
-package com.side.cooktime.testcontroller;
+package com.side.cooktime.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -10,11 +10,11 @@ import java.time.format.DateTimeFormatter;
 
 @Log4j2
 @Controller
-public class TestController {
-    @GetMapping("/ready")
+public class ServerCheckController {
+    @GetMapping("/health")
     @ResponseBody
-    public String ready(){
+    public String healthCheck(){
         log.info("Server Status Check");
-        return "Server is ready. Time is "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일, HH시 mm분 ss초"));
+        return "Server is running. Time is "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일, HH시 mm분 ss초"));
     }
 }
