@@ -14,7 +14,7 @@ public class ServerCheckController {
     @GetMapping("/health")
     @ResponseBody
     public String healthCheck(){
-//        log.info("Server Status Check");
+        log.info("Server Status Check");
         return "Server is running. Time is "+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일, HH시 mm분 ss초"));
     }
 }
