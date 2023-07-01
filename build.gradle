@@ -49,3 +49,14 @@ tasks.named('asciidoctor') {
 	inputs.dir snippetsDir
 	dependsOn test
 }
+
+//@SpringBootApplication이 선언된 MainClass 설정
+bootJar {
+	mainClassName = 'com.side.cooktime.CooktimeApplication'
+}
+
+//profiles 설정
+bootRun {
+	String activeProfile = System.properties['spring.profiles.active']
+	systemProperty "spring.profiles.active", activeProfile
+}
