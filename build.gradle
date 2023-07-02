@@ -51,10 +51,10 @@ tasks.named('asciidoctor') {
 	dependsOn test
 }
 
-bootJar {
-	dependsOn tasks.createDirectories
-	from("file:/home/ec2-user/cooktime_properties/application.properties") {
-		into "BOOT-INF/classes"
+sourceSets {
+	main {
+		resources {
+			srcDirs = ['src/main/resources', '/home/ec2-user/cooktime_properties']
+		}
 	}
 }
-
