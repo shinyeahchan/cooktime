@@ -50,7 +50,3 @@ tasks.named('asciidoctor') {
 	inputs.dir snippetsDir
 	dependsOn test
 }
-
-bootJar {
-	from('/home/ec2-user/cooktime_properties/application.properties')
-}
