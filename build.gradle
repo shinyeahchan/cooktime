@@ -54,10 +54,3 @@ tasks.named('asciidoctor') {
 bootJar {
 	from('/home/ec2-user/cooktime_properties/application.properties')
 }
-
-// Gradle의 상태 추적 비활성화
-tasks.withType(AbstractArchiveTask) {
-	doLast {
-		doNotTrack()
-	}
-}
