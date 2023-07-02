@@ -51,10 +51,6 @@ tasks.named('asciidoctor') {
 	dependsOn test
 }
 
-sourceSets {
-	main {
-		resources {
-			srcDirs = ['src/main/resources', '/home/ec2-user/cooktime_properties']
-		}
-	}
+bootJar {
+	from('/home/ec2-user/cooktime_properties/application.properties')
 }
