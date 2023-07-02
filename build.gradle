@@ -57,6 +57,7 @@ bootJar {
 
 // Gradle의 상태 추적 비활성화
 tasks.withType(AbstractArchiveTask) {
-	inputs.property("state", "absent")
-	doNotTrackState()
+	doLast {
+		doNotTrack()
+	}
 }
