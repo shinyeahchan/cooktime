@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "member")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "role")
+//TODO: Role을 enum타입 대신 쓸 수 있다면
+//@DiscriminatorColumn(name = "role")
 public abstract class Member extends BaseEntity {
 
     @Embedded
@@ -15,6 +16,9 @@ public abstract class Member extends BaseEntity {
     protected Password password;
     @Embedded
     protected Name name;
+
+    protected String provider;
+    protected String providerId;
 
     protected Member(final String email, final String password, final String firstName, final String lastName) {
         super();
