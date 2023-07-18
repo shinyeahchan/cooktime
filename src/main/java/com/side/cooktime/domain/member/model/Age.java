@@ -1,6 +1,5 @@
 package com.side.cooktime.domain.member.model;
 
-import com.side.cooktime.domain.category.model.dto.response.ResponseSaveDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;

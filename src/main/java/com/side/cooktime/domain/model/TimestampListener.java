@@ -12,7 +12,9 @@ public class TimestampListener {
     public void setCreatedDate(Object target) {
         if (target instanceof BaseEntity) {
             BaseEntity entity = (BaseEntity) target;
-            entity.create();
+            if(entity.getTimestamp() == null) {
+                entity.create();
+            }
         }
     }
 

@@ -2,11 +2,7 @@ package com.side.cooktime.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Getter
 @SuperBuilder
@@ -22,11 +18,6 @@ public abstract class BaseEntity {
 
     protected BaseEntity() {
         this.timestamp = new Timestamp();
-    }
-
-    protected BaseEntity(Long id, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.timestamp = new Timestamp(createdAt, updatedAt);
     }
 
     protected void create(){

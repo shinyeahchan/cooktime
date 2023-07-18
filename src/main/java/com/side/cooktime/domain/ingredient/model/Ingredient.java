@@ -4,14 +4,16 @@ import com.side.cooktime.domain.category.model.Category;
 import com.side.cooktime.domain.model.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+@NoArgsConstructor
 @Getter
 @SuperBuilder
 @Entity
 public class Ingredient extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
     @Embedded
@@ -30,10 +32,6 @@ public class Ingredient extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CountType countType;
 
-    public Ingredient() {
-        super();
-    }
-
     public Ingredient(final String name, final String image, final int expirationPeriod, final Storage storage, final String categoryName, final CountType countType) {
         this();
         this.name = new Name(name);
@@ -42,5 +40,13 @@ public class Ingredient extends BaseEntity {
         this.storage = storage;
         this.category = new Category(categoryName);
         this.countType = countType;
+    }
+
+    public void changeCategory(Category category) {
+        if (this.category != null) {
+            this.category.removeIngredient(this);
+        }
+        this.category = category;
+        category.addIngredient(this);
     }
 }
