@@ -1,7 +1,9 @@
 package com.side.cooktime.domain.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @MappedSuperclass
 public abstract class BaseEntity {
 
