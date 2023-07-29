@@ -4,6 +4,7 @@ import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.member.model.User;
 import com.side.cooktime.domain.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Log4j2
 @Service
 public class CustomOAuth2AuthorizedClientService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
@@ -39,40 +41,26 @@ public class CustomOAuth2AuthorizedClientService implements OAuth2UserService<OA
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        log.info("loadUser");
 
         DefaultOAuth2UserService defaultOAuth2UserService = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = defaultOAuth2UserService.loadUser(userRequest);
 
-        // 서비스 구분 (구글 : google, 네이버 : naver)
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        System.out.println("registrationId : " + registrationId);
-        System.out.println("------------------------------------------------------------");
-
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
-        System.out.println("userNameAttributeName : " + userNameAttributeName);
-        System.out.println("------------------------------------------------------------");
 
         String email = "";
         String given_name = "";
         String family_name = "";
         Map<String, Object> response = oAuth2User.getAttributes();
 
-        System.out.println("=======response=======");
-        System.out.println(response);
-        System.out.println("------------------------------------------------------------");
-
         if (registrationId.equals("naver")) {
             Map<String, Object> hash = (Map<String, Object>) response.get("response");
             email = (String) hash.get("email");
         } else if (registrationId.equals("google")) {
-            System.out.println("구글 로그인 ===========");
             email = (String) response.get("email");
             given_name = (String) response.get("given_name");
             family_name = (String) response.get("family_name");
-            System.out.println("email : " + email);
-            System.out.println("given_name : " + given_name);
-            System.out.println("family_name : " + family_name);
-            System.out.println("------------------------------------------------------------");
         } else {
             throw new OAuth2AuthenticationException("허용되지 않은 인증입니다.");
         }
@@ -82,9 +70,11 @@ public class CustomOAuth2AuthorizedClientService implements OAuth2UserService<OA
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
 
         if (optionalMember.isPresent()) {
+            log.info("이미 가입되어 있는 회원, 로그인 진행");
             user = (User) optionalMember.get();
             sessionUser = new SessionUser(user);
         } else {
+            log.info("회원가입 및 로그인 진행");
             String provider = userRequest.getClientRegistration().getRegistrationId(); // google
             String providerId = oAuth2User.getAttribute(userNameAttributeName);
 
@@ -93,13 +83,13 @@ public class CustomOAuth2AuthorizedClientService implements OAuth2UserService<OA
                             HttpMethod.GET,
                             new HttpEntity<>(createHeaders(userRequest.getAccessToken().getTokenValue())),
                             Map.class);
-            // gender 추출
+
             String gender = null;
             List<Map<String, Object>> gendersList = (List<Map<String, Object>>) additionalResponse.getBody().get("genders");
             if (gendersList != null && !gendersList.isEmpty()) {
                 gender = (String) gendersList.get(0).get("value");
             }
-            // birthYear 추출
+
             String birthYear = null;
             List<Map<String, Object>> birthdaysList = (List<Map<String, Object>>) additionalResponse.getBody().get("birthdays");
             if (birthdaysList != null && !birthdaysList.isEmpty()) {
@@ -119,13 +109,11 @@ public class CustomOAuth2AuthorizedClientService implements OAuth2UserService<OA
         httpSession.setAttribute("user", sessionUser);
 
 
-//        Collection<? extends GrantedAuthority> authorities = oAuth2User.getAuthorities();
         OAuth2AccessToken accessToken = userRequest.getAccessToken();
-        System.out.println("accessToken : " + accessToken.getTokenValue());
-        System.out.println("------------------------------------------------------------");
-        System.out.println("user.getRoleKey() : " + user.getRoleKey());
+        String accessTokenValue = accessToken.getTokenValue();
+        log.info("accessTokenValue : {}",accessTokenValue);
+        log.info("role : {}",user.getRoleKey());
 
-//        return oAuth2User;
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
                 oAuth2User.getAttributes(),
@@ -135,9 +123,6 @@ public class CustomOAuth2AuthorizedClientService implements OAuth2UserService<OA
 
     private HttpHeaders createHeaders(String accessToken) {
         HttpHeaders headers = new HttpHeaders();
-
-        System.out.println("accessToken : " + accessToken);
-
         headers.setBearerAuth(accessToken);
         return headers;
     }

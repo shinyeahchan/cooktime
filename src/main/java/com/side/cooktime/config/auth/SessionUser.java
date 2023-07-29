@@ -1,6 +1,5 @@
 package com.side.cooktime.config.auth;
 
-import com.side.cooktime.domain.member.model.Role;
 import com.side.cooktime.domain.member.model.User;
 import lombok.Data;
 
