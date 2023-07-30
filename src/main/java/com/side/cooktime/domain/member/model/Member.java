@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @Table(name = "member")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "user_type")
+@DiscriminatorColumn(name = "member_type")
 public abstract class Member extends BaseEntity {
 
     @Embedded
