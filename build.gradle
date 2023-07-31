@@ -20,14 +20,20 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 //	implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 //	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
 //	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     asciidoctorExtention 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
@@ -39,7 +45,8 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-//	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
 }
 
 ext {
@@ -77,17 +84,3 @@ bootJar {
         into 'static/docs'
     }
 }
-
-
-
-//tasks.named('test') {
-//    outputs.dir snippetsDir
-//    useJUnitPlatform()
-//}
-//
-//tasks.named('asciidoctor') {
-//    inputs.dir snippetsDir
-//    dependsOn test
-//}
-
-
