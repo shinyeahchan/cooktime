@@ -32,6 +32,13 @@ public class Ingredient extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CountType countType;
 
+    public Ingredient(final Long id, final String name, final String image, Category category){
+        super(id);
+        this.name = new Name(name);
+        this.image = new Image(image);
+        changeCategory(category);
+    }
+
     public Ingredient(final String name, final String image, final int expirationPeriod, final Storage storage, final String categoryName, final CountType countType) {
         this();
         this.name = new Name(name);
@@ -43,10 +50,11 @@ public class Ingredient extends BaseEntity {
     }
 
     public void changeCategory(Category category) {
-        if (this.category != null) {
+        if(this.category != null){
             this.category.removeIngredient(this);
         }
         this.category = category;
         category.addIngredient(this);
     }
 }
+

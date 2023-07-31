@@ -1,0 +1,23 @@
+= 재료 대분류 API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+
+[[대분류 재료-API]]
+== 재료 대분류
+
+=== Request Field
+include::{snippets}/category-controller-test/save/request-fields.adoc[]
+
+=== Response Field
+include::{snippets}/category-controller-test/save/response-fields.adoc[]
+
+=== Request
+
+include::{snippets}/category-controller-test/save/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/category-controller-test/save/http-response.adoc[]

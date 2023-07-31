@@ -16,6 +16,11 @@ public abstract class BaseEntity {
     @Embedded
     protected Timestamp timestamp;
 
+    protected BaseEntity(final Long id){
+        this.id = id;
+        this.timestamp = new Timestamp();
+    }
+
     protected BaseEntity() {
         this.timestamp = new Timestamp();
     }
