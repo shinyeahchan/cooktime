@@ -1,6 +1,8 @@
 package com.side.cooktime.domain.userstorage.controller;
 
+import com.side.cooktime.domain.userstorage.model.UserStorage;
 import com.side.cooktime.domain.userstorage.model.dto.request.RequestSaveDto;
+import com.side.cooktime.domain.userstorage.model.dto.response.ResponseSaveDto;
 import com.side.cooktime.domain.userstorage.service.UserStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,12 +19,16 @@ public class UserStorageController {
 
     private final UserStorageService userStorageService;
 
-    @PostMapping("/save/storage")
-    public ResponseEntity<Object> save(@RequestBody RequestSaveDto requestDto) {
-        boolean result = userStorageService.save(requestDto);
-        if (result) {
-            return new ResponseEntity<>(HttpStatus.OK);
+    @PostMapping("/storage")
+    public ResponseEntity<ResponseSaveDto> save(@RequestBody RequestSaveDto requestDto) {
+        UserStorage userStorage = userStorageService.save(requestDto);
+
+        if (userStorage == null) {
+            //TODO: 예외처리
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        ResponseSaveDto responseDto = new ResponseSaveDto(userStorage);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }

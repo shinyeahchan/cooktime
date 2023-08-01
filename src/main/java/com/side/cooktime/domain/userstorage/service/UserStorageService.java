@@ -20,11 +20,15 @@ public class UserStorageService {
     private final MemberService memberService;
     private final IngredientService ingredientService;
 
-    public boolean save(RequestSaveDto requestDto) {
+    public UserStorage save(RequestSaveDto requestDto) {
         Member member = memberService.findByEmail(requestDto.getMember_email());
         Ingredient ingredient = ingredientService.findById(requestDto.getIngredient_id());
-        UserStorage userStorage = requestDto.toEntity(member, ingredient);
-        userStorageRepository.save(userStorage);
-        return true;
+
+        //TODO:예외처리
+//        if (member == null || ingredient == null) {
+//            return null;
+//        }
+
+        return userStorageRepository.save(requestDto.toEntity(member, ingredient));
     }
 }

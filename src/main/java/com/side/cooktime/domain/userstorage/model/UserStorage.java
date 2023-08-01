@@ -4,6 +4,7 @@ import com.side.cooktime.domain.ingredient.model.Ingredient;
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.model.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @SuperBuilder
+@Getter
 @Entity
 @Table(name = "storage")
 public class UserStorage extends BaseEntity {
