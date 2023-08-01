@@ -19,7 +19,7 @@ public abstract class Member extends BaseEntity {
     protected Name name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", insertable = false, updatable = false)
+    @Column(name = "role", updatable = false)
     private Role role;
 
     protected String provider;
