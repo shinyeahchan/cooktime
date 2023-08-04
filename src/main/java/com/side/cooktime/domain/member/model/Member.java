@@ -1,14 +1,17 @@
 package com.side.cooktime.domain.member.model;
 
 import com.side.cooktime.domain.model.BaseEntity;
+import com.side.cooktime.domain.userstorage.model.UserStorage;
 import jakarta.persistence.*;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Table(name = "member")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "member_type")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Member extends BaseEntity {
 
     @Embedded
@@ -20,10 +23,14 @@ public abstract class Member extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", updatable = false)
-    private Role role;
+    protected Role role;
 
+    //TODO: 소셜로그인 추가 적용시 테이블 분리
     protected String provider;
     protected String providerId;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private final List<UserStorage> userStorages = new ArrayList<>();
 
     protected Member(final Role role, final String email, final String password, final String firstName, final String lastName) {
         super();

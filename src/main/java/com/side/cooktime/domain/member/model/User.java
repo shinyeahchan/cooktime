@@ -5,8 +5,6 @@ import lombok.Getter;
 
 @Entity
 @Getter
-@Table(name = "member")
-@DiscriminatorValue("U")
 public class User extends Member {
 
     @Enumerated(EnumType.STRING)
