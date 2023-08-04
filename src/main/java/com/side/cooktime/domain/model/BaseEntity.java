@@ -26,4 +26,8 @@ public abstract class BaseEntity {
     protected void update() {
         timestamp = timestamp.update();
     }
+
+    public void delete() {
+        timestamp = timestamp.delete();
+    }
 }
