@@ -31,7 +31,7 @@ public class UserStorageController {
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/storage/{id}")
+    @PutMapping("/storage")
     public ResponseEntity<ResponseDeleteDto> delete(@RequestBody RequestDeleteDto requestDto) {
         UserStorage userStorage = userStorageService.delete(requestDto);
         return new ResponseEntity<>(new ResponseDeleteDto(userStorage), HttpStatus.OK);

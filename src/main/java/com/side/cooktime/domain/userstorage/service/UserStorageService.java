@@ -5,6 +5,7 @@ import com.side.cooktime.domain.ingredient.service.IngredientService;
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.member.service.MemberService;
 import com.side.cooktime.domain.userstorage.model.UserStorage;
+import com.side.cooktime.domain.userstorage.model.dto.request.RequestDeleteDto;
 import com.side.cooktime.domain.userstorage.model.dto.request.RequestSaveDto;
 import com.side.cooktime.domain.userstorage.repository.UserStorageRepository;
 import jakarta.transaction.Transactional;
@@ -30,5 +31,11 @@ public class UserStorageService {
 //        }
 
         return userStorageRepository.save(requestDto.toEntity(member, ingredient));
+    }
+
+    public UserStorage delete(RequestDeleteDto requestDto) {
+        UserStorage userStorage = userStorageRepository.findById(requestDto.getId()).orElse(null);
+        userStorage.delete();
+        return userStorage;
     }
 }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Getter
 @Entity
-@Table(name = "storage")
+@Table(name = "user_storage")
 public class UserStorage extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
