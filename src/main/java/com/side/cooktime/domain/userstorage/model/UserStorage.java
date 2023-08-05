@@ -1,6 +1,7 @@
 package com.side.cooktime.domain.userstorage.model;
 
 import com.side.cooktime.domain.ingredient.model.Ingredient;
+import com.side.cooktime.domain.ingredient.model.Storage;
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.model.BaseEntity;
 import jakarta.persistence.*;
@@ -33,6 +34,6 @@ public class UserStorage extends BaseEntity {
 
     @Column(name = "storage_type")
     @Enumerated(EnumType.STRING)
-    private StorageType storageType;
+    private Storage storage;
 
 }

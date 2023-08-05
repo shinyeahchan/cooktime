@@ -1,8 +1,8 @@
 package com.side.cooktime.domain.userstorage.model.dto.request;
 
 import com.side.cooktime.domain.ingredient.model.Ingredient;
+import com.side.cooktime.domain.ingredient.model.Storage;
 import com.side.cooktime.domain.member.model.Member;
-import com.side.cooktime.domain.userstorage.model.StorageType;
 import com.side.cooktime.domain.userstorage.model.UserStorage;
 import lombok.Data;
 
@@ -23,7 +23,7 @@ public class RequestSaveDto {
                 .ingredient(ingredient)
                 .quantity(quantity)
                 .expirationDate(expiration_date)
-                .storageType(StorageType.findEnumByValue(storage_type))
+                .storage(Storage.valueOf(storage_type))
                 .build();
     }
 

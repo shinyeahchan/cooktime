@@ -21,12 +21,6 @@ public class UserStorageController {
     @PostMapping("/storage")
     public ResponseEntity<ResponseSaveDto> save(@RequestBody RequestSaveDto requestDto) {
         UserStorage userStorage = userStorageService.save(requestDto);
-
-        if (userStorage == null) {
-            //TODO: 예외처리
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
         ResponseSaveDto responseDto = new ResponseSaveDto(userStorage);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
