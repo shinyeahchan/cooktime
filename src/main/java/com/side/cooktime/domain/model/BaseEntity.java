@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
 @Getter
 @SuperBuilder
 @EntityListeners(TimestampListener.class)
@@ -16,6 +18,9 @@ public abstract class BaseEntity {
     @Embedded
     protected Timestamp timestamp;
 
+    @Column(nullable = true)
+    private LocalDateTime deletedAt;
+
     protected BaseEntity() {
         this.timestamp = new Timestamp();
     }
@@ -26,8 +31,7 @@ public abstract class BaseEntity {
     protected void update() {
         timestamp = timestamp.update();
     }
-
     public void delete() {
-        timestamp = timestamp.delete();
+        this.deletedAt = LocalDateTime.now();
     }
 }
