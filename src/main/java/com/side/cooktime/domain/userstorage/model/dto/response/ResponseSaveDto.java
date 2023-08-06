@@ -15,6 +15,6 @@ public class ResponseSaveDto {
         this.memberEmail = memberEmail;
         this.responseSaveDtos = userStorages.stream()
                 .map(ResponseSaveOneDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

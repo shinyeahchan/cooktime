@@ -27,15 +27,16 @@ public class UserStorageController {
         // 현재 인증된 사용자의 정보 가져오기
         DefaultOAuth2User oauth2User = (DefaultOAuth2User) authentication.getPrincipal();
         // oauth2User에서 이메일 정보 가져오기
-        String member_email = oauth2User.getAttribute("email");
-        List<UserStorage> savedUserStorages = userStorageService.saveAll(member_email, requestDtos);
-        ResponseSaveDto responseDto = new ResponseSaveDto(member_email, savedUserStorages);
+        String memberEmail = oauth2User.getAttribute("email");
+        ResponseSaveDto responseDto = userStorageService.saveAll(memberEmail, requestDtos);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    @PutMapping("/storage")
-    public ResponseEntity<ResponseDeleteDto> delete(@RequestBody RequestDeleteDto requestDto) {
-        UserStorage userStorage = userStorageService.delete(requestDto);
-        return new ResponseEntity<>(new ResponseDeleteDto(userStorage), HttpStatus.OK);
+    @PutMapping("/storage/delete")
+    public ResponseEntity<ResponseDeleteDto> delete(@RequestBody List<RequestDeleteDto> requestDtos, Authentication authentication) {
+        DefaultOAuth2User oauth2User = (DefaultOAuth2User) authentication.getPrincipal();
+        String memberEmail = oauth2User.getAttribute("email");
+        ResponseDeleteDto responseDto = userStorageService.deleteAllSoftly(memberEmail, requestDtos);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }
