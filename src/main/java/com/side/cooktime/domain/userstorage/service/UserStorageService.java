@@ -12,6 +12,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -21,21 +24,24 @@ public class UserStorageService {
     private final MemberService memberService;
     private final IngredientService ingredientService;
 
-    public UserStorage save(RequestSaveDto requestDto) {
-        Member member = memberService.findByEmail(requestDto.getMember_email());
-        Ingredient ingredient = ingredientService.findById(requestDto.getIngredient_id());
-
-        //TODO:예외처리
-//        if (member == null || ingredient == null) {
-//            return null;
-//        }
-
-        return userStorageRepository.save(requestDto.toEntity(member, ingredient));
-    }
-
     public UserStorage delete(RequestDeleteDto requestDto) {
         UserStorage userStorage = userStorageRepository.findById(requestDto.getId()).orElse(null);
         userStorage.delete();
         return userStorage;
+    }
+
+    public List<UserStorage> saveAll(String memberEmail, List<RequestSaveDto> requestDtos) {
+        Member member = memberService.findByEmail(memberEmail);
+        if (member == null) { /*TODO:예외처리*/ }
+        List<UserStorage> userStorages = requestDtos.stream()
+                .map(requestDtoOne -> getUserStorage(member, requestDtoOne))
+                .collect(Collectors.toList());
+        return userStorageRepository.saveAll(userStorages);
+    }
+
+    private UserStorage getUserStorage(Member member, RequestSaveDto requestDtoOne) {
+        Ingredient ingredient = ingredientService.findById(requestDtoOne.getIngredient_id());
+        if (ingredient == null) { /*TODO:예외처리*/ }
+        return requestDtoOne.toEntity(member, ingredient);
     }
 }

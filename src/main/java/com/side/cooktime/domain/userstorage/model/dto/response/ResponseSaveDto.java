@@ -3,17 +3,18 @@ package com.side.cooktime.domain.userstorage.model.dto.response;
 import com.side.cooktime.domain.userstorage.model.UserStorage;
 import lombok.Data;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 public class ResponseSaveDto {
+    private String memberEmail;
+    private List<ResponseSaveOneDto> responseSaveDtos;
 
-    private Long id;
-    private String ingredient_name;
-    private int quantity;
-
-    public ResponseSaveDto(UserStorage userStorage) {
-        this.id = userStorage.getId();
-        this.ingredient_name = userStorage.getIngredient().getName().getName();
-        this.quantity = userStorage.getQuantity();
+    public ResponseSaveDto(String memberEmail, List<UserStorage> userStorages) {
+        this.memberEmail = memberEmail;
+        this.responseSaveDtos = userStorages.stream()
+                .map(ResponseSaveOneDto::new)
+                .collect(Collectors.toList());
     }
-
 }

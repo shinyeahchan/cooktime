@@ -1,12 +1,8 @@
 package com.side.cooktime.domain.member.model;
 
 import com.side.cooktime.domain.model.BaseEntity;
-import com.side.cooktime.domain.userstorage.model.UserStorage;
 import jakarta.persistence.*;
 import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -29,8 +25,8 @@ public abstract class Member extends BaseEntity {
     protected String provider;
     protected String providerId;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private final List<UserStorage> userStorages = new ArrayList<>();
+    @Embedded
+    private final UserStorages userStorages = new UserStorages();
 
     protected Member(final Role role, final String email, final String password, final String firstName, final String lastName) {
         super();

@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class RequestSaveDto {
-
-    private String member_email;
     private Long ingredient_id;
     private int quantity;
     private LocalDateTime expiration_date;
