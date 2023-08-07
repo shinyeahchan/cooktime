@@ -3,11 +3,9 @@ package com.side.cooktime.domain.category.controller;
 import com.side.cooktime.document.RestDocsTestSupport;
 import com.side.cooktime.domain.category.model.Category;
 import com.side.cooktime.domain.category.model.Ingredients;
-import com.side.cooktime.domain.category.service.CategoryService;
 import com.side.cooktime.domain.ingredient.model.Ingredient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.util.Arrays;
