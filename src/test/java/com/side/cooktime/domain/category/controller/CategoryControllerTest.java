@@ -25,13 +25,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class CategoryControllerTest extends RestDocsTestSupport {
 
-    @MockBean
-    private CategoryService categoryService;
-
     @Test
-    @DisplayName("Save 성공")
-    public void save() throws Exception {
-        final Category category = new Category("채소");
+    @DisplayName("Save 201")
+    public void save_201() throws Exception {
+        final Category category = new Category(1L,"채소");
         when(categoryService.save(any())).thenReturn(category);
 
         this.mockMvc.perform(post("/api/v1/category")
@@ -41,7 +38,7 @@ class CategoryControllerTest extends RestDocsTestSupport {
                 .andDo(
                         restDocs.document(
                                 requestFields(
-                                        fieldWithPath("name").description("재료 대분류 이름")
+                                        fieldWithPath("name").description("재료 대분류 이름").optional()
                                 ),
                                 responseFields(
                                         fieldWithPath("id").description("ID"),
@@ -51,8 +48,8 @@ class CategoryControllerTest extends RestDocsTestSupport {
     }
 
     @Test
-    @DisplayName("Delete 성공")
-    public void Delete_성공() throws Exception {
+    @DisplayName("Delete 200")
+    public void delete_200() throws Exception {
         doNothing().when(categoryService).delete(1L);
         this.mockMvc.perform(delete("/api/v1/category/{id}", 1L))
                 .andExpect(status().isOk())
@@ -67,8 +64,8 @@ class CategoryControllerTest extends RestDocsTestSupport {
     }
 
     @Test
-    @DisplayName("findIngredients_성공")
-    public void findIngredients() throws Exception {
+    @DisplayName("findIngredients 200")
+    public void findIngredients_200() throws Exception {
         Long categoryId = 1L;
         Category category = new Category(categoryId, "고기");
 

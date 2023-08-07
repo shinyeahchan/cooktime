@@ -26,7 +26,7 @@ public class Ingredient extends BaseEntity {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private Storage storage;
+    private StorageType storageType;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -39,12 +39,12 @@ public class Ingredient extends BaseEntity {
         changeCategory(category);
     }
 
-    public Ingredient(final String name, final String image, final int expirationPeriod, final Storage storage, final String categoryName, final CountType countType) {
+    public Ingredient(final String name, final String image, final int expirationPeriod, final StorageType storageType, final String categoryName, final CountType countType) {
         this();
         this.name = new Name(name);
         this.image = new Image(image);
         this.expirationPeriod = new Day(expirationPeriod);
-        this.storage = storage;
+        this.storageType = storageType;
         this.category = new Category(categoryName);
         this.countType = countType;
     }
