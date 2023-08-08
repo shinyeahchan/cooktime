@@ -23,7 +23,7 @@ public class IngredientController {
     public ResponseEntity<ResponseSaveDto> save(@RequestBody RequestSaveDto requestDto){
         Ingredient ingredient = ingredientService.save(requestDto);
         ResponseSaveDto responseDto = new ResponseSaveDto(ingredient);
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/ingredient/{id}")
