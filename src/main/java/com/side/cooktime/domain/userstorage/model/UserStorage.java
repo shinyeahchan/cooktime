@@ -8,8 +8,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @SuperBuilder
@@ -30,7 +29,7 @@ public class UserStorage extends BaseEntity {
     private Integer quantity;
 
     @Column(name = "expiration_date", nullable = false)
-    private LocalDateTime expirationDate;
+    private LocalDate expirationDate;
 
     @Column(name = "storage_type")
     @Enumerated(EnumType.STRING)

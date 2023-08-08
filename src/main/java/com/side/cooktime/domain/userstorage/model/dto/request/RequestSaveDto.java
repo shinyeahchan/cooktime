@@ -5,14 +5,13 @@ import com.side.cooktime.domain.ingredient.model.Storage;
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.userstorage.model.UserStorage;
 import lombok.Data;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 public class RequestSaveDto {
     private Long ingredient_id;
     private int quantity;
-    private LocalDateTime expiration_date;
+    private LocalDate expiration_date;
     private String storage_type;
 
     public UserStorage toEntity(Member member, Ingredient ingredient) {
