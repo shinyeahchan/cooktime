@@ -21,7 +21,7 @@ public class RequestSaveDto {
                 .name(new Name(name))
                 .image(new Image(s3ImageUrl))
                 .expirationPeriod(new Day(expirationPeriod))
-                .storage(Storage.find(storage))
+                .storageType(StorageType.find(storage))
                 .countType(CountType.find(countType))
                 .build();
     }

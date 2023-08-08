@@ -26,7 +26,7 @@ public class IngredientController {
     public ResponseEntity<ResponseSaveDto> save(RequestSaveDto requestDto) throws IOException {
         Ingredient ingredient = ingredientService.save(requestDto);
         ResponseSaveDto responseDto = new ResponseSaveDto(ingredient);
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/ingredient/{id}")
