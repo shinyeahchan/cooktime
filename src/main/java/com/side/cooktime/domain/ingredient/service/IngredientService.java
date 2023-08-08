@@ -25,6 +25,10 @@ public class IngredientService {
         return ingredientRepository.findById(id).orElse(null);
     }
 
+    public Ingredient getReferenceById(Long id){
+        return ingredientRepository.getReferenceById(id);
+    }
+
     public void delete(Long ingredientId) {
         ingredientRepository.deleteById(ingredientId);
     }

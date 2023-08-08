@@ -12,6 +12,7 @@ import com.side.cooktime.domain.userstorage.model.dto.response.ResponseSaveDto;
 import com.side.cooktime.domain.userstorage.repository.UserStorageRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,26 +20,24 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 @Service
+@Log4j2
 public class UserStorageService {
 
     private final UserStorageRepository userStorageRepository;
     private final MemberService memberService;
     private final IngredientService ingredientService;
 
-    public ResponseSaveDto saveAll(String memberEmail, List<RequestSaveDto> requestDtos) {
+    public ResponseSaveDto saveAll(String memberEmail, RequestSaveDto requestDto) {
         Member member = memberService.findByEmail(memberEmail);
         if (member == null) { /*TODO:예외처리*/ }
-        List<UserStorage> userStorages = requestDtos.stream()
-                .map(requestDtoOne -> getUserStorage(member, requestDtoOne))
-                .toList();
-        List<UserStorage> savedUserStorages = userStorageRepository.saveAll(userStorages);
-        return new ResponseSaveDto(memberEmail, savedUserStorages);
-    }
 
-    private UserStorage getUserStorage(Member member, RequestSaveDto requestDtoOne) {
-        Ingredient ingredient = ingredientService.findById(requestDtoOne.getIngredient_id());
-        if (ingredient == null) { /*TODO:예외처리*/ }
-        return requestDtoOne.toEntity(member, ingredient);
+        List<Long> ingredientIds = requestDto.getIngredientIds();
+        List<Ingredient> ingredients = ingredientIds.stream()
+                .map(ingredientService::getReferenceById) /*TODO:예외처리*/
+                .toList();
+        List<UserStorage> userStorages = requestDto.toEntities(member, ingredients);
+
+        return new ResponseSaveDto(memberEmail, userStorageRepository.saveAll(userStorages));
     }
 
     public ResponseDeleteDto deleteAllSoftly(String memberEmail, List<RequestDeleteDto> requestDtos) {
