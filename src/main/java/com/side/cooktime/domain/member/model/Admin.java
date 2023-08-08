@@ -1,6 +1,5 @@
 package com.side.cooktime.domain.member.model;
 
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 

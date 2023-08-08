@@ -21,6 +21,11 @@ public abstract class BaseEntity {
     @Column(nullable = true)
     private LocalDateTime deletedAt;
 
+    protected BaseEntity(final Long id){
+        this.id = id;
+        this.timestamp = new Timestamp();
+    }
+
     protected BaseEntity() {
         this.timestamp = new Timestamp();
     }
