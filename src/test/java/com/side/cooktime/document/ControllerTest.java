@@ -9,6 +9,9 @@ import com.side.cooktime.domain.category.service.CategoryService;
 import com.side.cooktime.domain.ingredient.controller.IngredientController;
 import com.side.cooktime.domain.ingredient.repository.IngredientRepository;
 import com.side.cooktime.domain.ingredient.service.IngredientService;
+import com.side.cooktime.domain.userstorage.controller.UserStorageController;
+import com.side.cooktime.domain.userstorage.repository.UserStorageRepository;
+import com.side.cooktime.domain.userstorage.service.UserStorageService;
 import org.junit.jupiter.api.Disabled;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest({
         CategoryController.class,
         IngredientController.class,
-        CommonDocController.class
+        CommonDocController.class,
+        UserStorageController.class
 })
 @MockBean(JpaMetamodelMappingContext.class)
 public abstract class ControllerTest {
@@ -38,10 +42,16 @@ public abstract class ControllerTest {
     protected IngredientRepository ingredientRepository;
 
     @MockBean
+    protected UserStorageRepository userStorageRepository;
+
+    @MockBean
     protected IngredientService ingredientService;
 
     @MockBean
     protected CategoryService categoryService;
+
+    @MockBean
+    protected UserStorageService userStorageService;
 
     public String createJson(Object dto) throws JsonProcessingException{
         return objectMapper.writeValueAsString(dto);
