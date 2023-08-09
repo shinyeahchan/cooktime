@@ -29,9 +29,9 @@ public class UserStorageController {
         return new ResponseEntity<>(responseSaveDto, HttpStatus.OK);
     }
 
-    @PutMapping("/storage/delete")
-    public ResponseEntity<ResponseDeleteDto> delete(@RequestBody List<RequestDeleteDto> requestDtos, Authentication authentication) {
-        ResponseDeleteDto responseDto = userStorageService.deleteAllSoftly(OAuth2UserUtils.getEmail(authentication), requestDtos);
+    @DeleteMapping("/storage/delete")
+    public ResponseEntity<ResponseDeleteDto> delete(@RequestBody List<RequestDeleteDto> requestDtos) {
+        ResponseDeleteDto responseDto = userStorageService.delete("test@gmail.com", requestDtos);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }

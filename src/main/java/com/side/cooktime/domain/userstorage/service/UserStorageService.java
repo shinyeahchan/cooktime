@@ -40,7 +40,7 @@ public class UserStorageService {
         return new ResponseSaveDto(memberEmail, userStorageRepository.saveAll(userStorages));
     }
 
-    public ResponseDeleteDto deleteAllSoftly(String memberEmail, List<RequestDeleteDto> requestDtos) {
+    public ResponseDeleteDto delete(String memberEmail, List<RequestDeleteDto> requestDtos) {
         Member member = memberService.findByEmail(memberEmail);
         List<Long> deleteRequestedIds = requestDtos.stream().map(RequestDeleteDto::getId).toList();
         List<UserStorage> userStorages = userStorageRepository.findByIdInAndMember(deleteRequestedIds, member);

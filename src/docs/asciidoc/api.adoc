@@ -8,3 +8,4 @@
 
 include::Category-API.adoc[]
 include::Ingredient-API.adoc[]
+include::UserStorage-API.adoc[]
