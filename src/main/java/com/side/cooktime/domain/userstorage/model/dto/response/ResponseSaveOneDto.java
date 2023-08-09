@@ -11,7 +11,7 @@ public class ResponseSaveOneDto {
 
     public ResponseSaveOneDto(UserStorage userStorage) {
         this.id = userStorage.getId();
-        this.ingredientName = userStorage.getIngredient().getName().getName();
+        this.ingredientName = userStorage.getIngredient().getName().getName();  /*TODO:메서드체이닝 개선*/
         this.quantity = userStorage.getQuantity();
     }
 }

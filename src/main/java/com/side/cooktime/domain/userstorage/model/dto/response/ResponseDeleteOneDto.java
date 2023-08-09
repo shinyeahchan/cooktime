@@ -10,6 +10,6 @@ public class ResponseDeleteOneDto {
 
     public ResponseDeleteOneDto(UserStorage userStorage){
         this.id = userStorage.getId();
-        this.ingredient_name = userStorage.getIngredient().getName().getName();
+        this.ingredient_name = userStorage.getIngredient().getName().getName(); /*TODO:메서드체이닝 개선*/
     }
 }

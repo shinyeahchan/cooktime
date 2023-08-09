@@ -29,9 +29,11 @@ public class UserStorageController {
         return new ResponseEntity<>(responseSaveDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/storage/delete")
+    @DeleteMapping("/storage/delete")                         /* TODO : RequestSaveDto처럼 묶어서 진행 */
     public ResponseEntity<ResponseDeleteDto> delete(@RequestBody List<RequestDeleteDto> requestDtos) {
         ResponseDeleteDto responseDto = userStorageService.delete("test@gmail.com", requestDtos);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
+
+    //TODO: update작업, getAll작업
 }
