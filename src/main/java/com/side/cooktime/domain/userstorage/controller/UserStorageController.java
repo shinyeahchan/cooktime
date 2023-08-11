@@ -4,9 +4,7 @@ import com.side.cooktime.config.auth.OAuth2UserUtils;
 import com.side.cooktime.domain.userstorage.model.dto.request.RequestDeleteDto;
 import com.side.cooktime.domain.userstorage.model.dto.request.RequestSaveDto;
 import com.side.cooktime.domain.userstorage.model.dto.request.RequestUpdateDto;
-import com.side.cooktime.domain.userstorage.model.dto.response.ResponseDeleteDto;
-import com.side.cooktime.domain.userstorage.model.dto.response.ResponseSaveDto;
-import com.side.cooktime.domain.userstorage.model.dto.response.ResponseUpdateDto;
+import com.side.cooktime.domain.userstorage.model.dto.response.*;
 import com.side.cooktime.domain.userstorage.service.UserStorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -36,12 +34,17 @@ public class UserStorageController {
     }
 
     @DeleteMapping("/storage/delete")
-    public ResponseEntity<ResponseDeleteDto> delete(@RequestBody RequestDeleteDto requestDto) {
-        ResponseDeleteDto responseDto = userStorageService.delete("test@gmail.com", requestDto);
+    public ResponseEntity<ResponseDeleteDto> delete(@RequestBody RequestDeleteDto requestDto, Authentication authentication) {
+        ResponseDeleteDto responseDto = userStorageService.delete(OAuth2UserUtils.getEmail(authentication), requestDto);
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
+    @GetMapping("/storage/all")
+    public ResponseEntity<ResponseGetDto> get(Authentication authentication) {
+        ResponseGetDto responseDto = userStorageService.get(OAuth2UserUtils.getEmail(authentication));
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
 
-    //TODO: getAll작업
+    //TODO: get (with 페이징)
 
 }

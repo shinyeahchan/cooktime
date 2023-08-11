@@ -10,4 +10,8 @@ import java.util.List;
 @Repository
 public interface UserStorageRepository extends JpaRepository<UserStorage, Long> {
     List<UserStorage> findByIdInAndMember(List<Long> ids, Member member);
+
+    UserStorage findByIdAndMember(Long id, Member member);
+
+    List<UserStorage> findAllByMember(Member member);
 }
