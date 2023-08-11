@@ -13,5 +13,5 @@ public interface UserStorageRepository extends JpaRepository<UserStorage, Long> 
 
     UserStorage findByIdAndMember(Long id, Member member);
 
-    List<UserStorage> findAllByMember(Member member);
+    List<UserStorage> findAllByMemberAndDeletedAtIsNull(Member member);
 }

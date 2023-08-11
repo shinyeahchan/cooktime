@@ -63,7 +63,7 @@ public class UserStorageService {
 
     public ResponseGetDto get(String memberEmail) {
         Member member = memberService.findByEmail(memberEmail);
-        List<UserStorage> userStorages = userStorageRepository.findAllByMember(member);
+        List<UserStorage> userStorages = userStorageRepository.findAllByMemberAndDeletedAtIsNull(member);
         return new ResponseGetDto(memberEmail, userStorages);
     }
 }
