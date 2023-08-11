@@ -2,9 +2,11 @@ package com.side.cooktime.domain.userstorage.model.dto.response;
 
 import com.side.cooktime.domain.ingredient.model.Ingredient;
 import com.side.cooktime.domain.userstorage.model.UserStorage;
+import lombok.Data;
 
 import java.time.LocalDate;
 
+@Data
 public class ResponseGetOneDto {
     private Long id;
     private String ingredientName;
