@@ -77,11 +77,11 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
 
     //TODO: Authentication이 null이라서 현재 테스트 불가
     @Test
-    @DisplayName("Create 201")
-    public void create_201() throws Exception {
+    @DisplayName("Save 201")
+    public void save_201() throws Exception {
         ResponseSaveDto responseSaveDto = new ResponseSaveDto("test@gmail.com", userStorages);
 
-        when(userStorageService.save(any(), any())).thenReturn(responseSaveDto);
+        when(userStorageService.save(any())).thenReturn(responseSaveDto);
 
         this.mockMvc.perform(post("/api/v1/storage")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -110,7 +110,7 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
     public void delete_200() throws Exception {
         ResponseDeleteDto responseDeleteDto = new ResponseDeleteDto("test@gmail.com", userStorages);
 
-        when(userStorageService.delete(any(), any())).thenReturn(responseDeleteDto);
+        when(userStorageService.delete(any())).thenReturn(responseDeleteDto);
 
         this.mockMvc.perform(delete("/api/v1/storage/delete")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -135,7 +135,7 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
     public void update_200() throws Exception {
         ResponseUpdateDto responseUpdateDto = new ResponseUpdateDto("test@gmail.com", userStorages);
 
-        when(userStorageService.update(any(), any())).thenReturn(responseUpdateDto);
+        when(userStorageService.update(any())).thenReturn(responseUpdateDto);
 
         this.mockMvc.perform(put("/api/v1/storage")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -152,7 +152,8 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
                                 responseFields(
                                         fieldWithPath("memberEmail").description("수정 요청한 유저 email"),
                                         fieldWithPath("response[].id").description("수정한 유저스토리지 id"),
-                                        fieldWithPath("response[].ingredientName").description("재료 이름")
+                                        fieldWithPath("response[].ingredientName").description("재료 이름"),
+                                        fieldWithPath("response[].quantity").description("재료 양")
                                 )
                         )
                 );
@@ -163,9 +164,9 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
     public void get_200() throws Exception {
         ResponseGetDto responseGetDto = new ResponseGetDto("test@gmail.com", userStorages);
 
-        when(userStorageService.get(any())).thenReturn(responseGetDto);
+        when(userStorageService.get()).thenReturn(responseGetDto);
 
-        this.mockMvc.perform(get("/api/v1/storage/all"))
+        this.mockMvc.perform(get("/api/v1/storage"))
                 .andExpect(status().isOk())
                 .andDo(
                         restDocs.document(
