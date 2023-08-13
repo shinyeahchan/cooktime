@@ -74,8 +74,6 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
         userStorages.clear();
     }
 
-
-    //TODO: Authentication이 null이라서 현재 테스트 불가
     @Test
     @DisplayName("Save 201")
     public void save_201() throws Exception {
