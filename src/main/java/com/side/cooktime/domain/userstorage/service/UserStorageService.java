@@ -68,15 +68,15 @@ public class UserStorageService {
         return new ResponseDeleteDto(userStorages.size());
     }
 
-    public ResponseGetDto get() {
+    public UserStorages get() {
         Member member = getCurrentMember();
         List<UserStorage> userStorages = userStorageRepository.findAllByMemberAndDeletedAtIsNull(member);
-        return new ResponseGetDto(member.getEmail().getEmail(), userStorages);
+        return new UserStorages(userStorages);
     }
 
-    public ResponseGetDto get(Pageable pageable) {
+    public UserStorages get(Pageable pageable) {
         Member member = getCurrentMember();
         List<UserStorage> userStorages = userStorageRepository.findByMemberAndDeletedAtIsNullOrderByIdDesc(member, pageable).getContent();
-        return new ResponseGetDto(member.getEmail().getEmail(), userStorages);
+        return new UserStorages(userStorages);
     }
 }

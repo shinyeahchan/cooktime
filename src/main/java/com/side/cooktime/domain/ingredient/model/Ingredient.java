@@ -60,5 +60,9 @@ public class Ingredient extends BaseEntity {
     public String getName(){
         return name.getName();
     }
+
+    public String getImageUrl(){
+        return image.getUrl();
+    }
 }
 

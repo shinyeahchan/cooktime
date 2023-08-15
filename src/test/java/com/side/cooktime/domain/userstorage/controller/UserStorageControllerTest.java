@@ -156,22 +156,19 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
     @Test
     @DisplayName("Get 200")
     public void get_200() throws Exception {
-        ResponseGetDto responseGetDto = new ResponseGetDto("test@gmail.com", userStorages);
-
-        when(userStorageService.get()).thenReturn(responseGetDto);
+        when(userStorageService.get()).thenReturn(userStorageList);
 
         this.mockMvc.perform(get("/api/v1/storage"))
                 .andExpect(status().isOk())
                 .andDo(
                         restDocs.document(
                                 responseFields(
-                                        fieldWithPath("memberEmail").description("요청한 유저 email"),
-                                        fieldWithPath("response[].id").description("유저스토리지 id"),
-                                        fieldWithPath("response[].ingredientName").description("재료 이름"),
-                                        fieldWithPath("response[].ingredientImageUrl").description("재료 이미지 url"),
-                                        fieldWithPath("response[].quantity").description("재료 양"),
-                                        fieldWithPath("response[].expiration_date").description("유통 기한"),
-                                        fieldWithPath("response[].storage_type").description("보관 방식")
+                                        fieldWithPath("[].id").description("유저스토리지 id"),
+                                        fieldWithPath("[].ingredientName").description("재료 이름"),
+                                        fieldWithPath("[].ingredientImageUrl").description("재료 이미지 url"),
+                                        fieldWithPath("[].quantity").description("재료 양"),
+                                        fieldWithPath("[].expiration_date").description("유통 기한"),
+                                        fieldWithPath("[].storage_type").description("보관 방식")
                                 )
                         )
                 );

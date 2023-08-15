@@ -43,9 +43,9 @@ public class UserStorageController {
     }
 
     @GetMapping("/storage")
-    public ResponseEntity<ResponseGetDto> get() {
-        ResponseGetDto responseDto = userStorageService.get();
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    public ResponseEntity<List<ResponseGetDto>> get() {
+        UserStorages userStorages = userStorageService.get();
+        return new ResponseEntity<>(userStorages.toDtos(ResponseGetDto::new), HttpStatus.OK);
     }
 
     //TODO:페이징
