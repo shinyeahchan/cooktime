@@ -42,17 +42,6 @@ public class UserStorageService {
         return memberService.findByEmail(OAuth2UserUtils.getEmail(SecurityContextHolder.getContext().getAuthentication()));
     }
 
-//    public ResponseSaveDto save2(RequestSaveDto requestDto) {
-//        Member member = getCurrentMember();
-//        if (member == null) { /*TODO:예외처리*/ }
-//        List<Long> ingredientIds = requestDto.getIngredientIds();
-//        List<Ingredient> ingredients = ingredientIds.stream()
-//                .map(ingredientService::getReferenceById) /*TODO:예외처리*/
-//                .toList();
-//        List<UserStorage> userStorages = requestDto.toEntities(member, ingredients);
-//        return new ResponseSaveDto(member.getEmail().getEmail(), userStorageRepository.saveAll(userStorages));
-//    }
-
     public List<UserStorage> save(RequestSaveDto requestDto) {
         Member member = getCurrentMember();
         List<Long> ingredientIds = requestDto.getIngredientIds();
@@ -62,15 +51,14 @@ public class UserStorageService {
         return requestDto.toEntities(member, ingredients);
     }
 
-    public ResponseUpdateDto update(RequestUpdateDto requestDto) {
+    public UserStorages update(RequestUpdateDto requestDto) {
         Member member = getCurrentMember();
         List<UserStorage> updatedUserStorages = new ArrayList<>();
         for (RequestUpdateOneDto requestOne : requestDto.getRequest()) {
             UserStorage userStorage = userStorageRepository.findByIdAndMember(requestOne.getId(), member);
             updatedUserStorages.add(userStorage.update(requestOne));
         }
-        UserStorages userStorages = new UserStorages(updatedUserStorages);
-        return new ResponseUpdateDto(member.getEmail().getEmail(), updatedUserStorages);
+        return new UserStorages(updatedUserStorages);
     }
 
     public ResponseDeleteDto delete(RequestDeleteDto requestDto) {

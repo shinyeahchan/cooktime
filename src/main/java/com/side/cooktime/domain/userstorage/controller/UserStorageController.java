@@ -32,8 +32,8 @@ public class UserStorageController {
 
     @PutMapping("/storage")
     public ResponseEntity<ResponseUpdateDto> update(@RequestBody RequestUpdateDto requestDto) {
-        ResponseUpdateDto responseDto = userStorageService.update(requestDto);
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        UserStorages userStorages = userStorageService.update(requestDto);
+        return new ResponseEntity<>(new ResponseUpdateDto(userStorages.getSize()), HttpStatus.OK);
     }
 
     @DeleteMapping("/storage/delete")

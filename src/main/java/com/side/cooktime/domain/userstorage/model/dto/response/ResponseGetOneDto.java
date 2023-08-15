@@ -19,7 +19,7 @@ public class ResponseGetOneDto {
         this.id = userStorage.getId();
 
         Ingredient ingredient = userStorage.getIngredient();
-        this.ingredientName = ingredient.getName().getName();  /*TODO:메서드체이닝 개선*/
+        this.ingredientName = ingredient.getName();
         this.ingredientImageUrl = ingredient.getImage().getUrl();
 
         this.quantity = userStorage.getQuantity();
