@@ -56,5 +56,9 @@ public class Ingredient extends BaseEntity {
         this.category = category;
         category.addIngredient(this);
     }
+
+    public String getName(){
+        return name.getName();
+    }
 }
 
