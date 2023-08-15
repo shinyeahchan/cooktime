@@ -500,11 +500,10 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 201 Created
 Content-Type: application/json;charset=UTF-8
-Content-Length: 35
+Content-Length: 16
 
 {
-  "id" : 1,
-  "name" : "채소"
+  "size" : 1
 }</code></pre>
 </div>
 </div>
@@ -526,14 +525,9 @@ Content-Length: 35
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ID</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">재료 대분류 이름</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Save 된 갯수</p></td>
 </tr>
 </tbody>
 </table>
@@ -543,8 +537,7 @@ Content-Length: 35
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-json" data-lang="json">{
-  "id" : 1,
-  "name" : "채소"
+  "size" : 1
 }</code></pre>
 </div>
 </div>
@@ -589,10 +582,10 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 14
+Content-Length: 16
 
 {
-  "id" : 1
+  "size" : 1
 }</code></pre>
 </div>
 </div>
@@ -614,9 +607,9 @@ Content-Length: 14
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">삭제된 Id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delete 된 갯수</p></td>
 </tr>
 </tbody>
 </table>
@@ -626,7 +619,7 @@ Content-Length: 14
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code class="language-json" data-lang="json">{
-  "id" : 1
+  "size" : 1
 }</code></pre>
 </div>
 </div>
