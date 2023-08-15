@@ -98,7 +98,7 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
                                         fieldWithPath("request[].storage_type").description("보관 방식")
                                 ),
                                 responseFields(
-                                        fieldWithPath("size").description("저장 된 갯수")
+                                        fieldWithPath("size").description("Save 된 갯수")
                                 )
                         )
                 );
@@ -107,7 +107,7 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
     @Test
     @DisplayName("Delete 200")
     public void delete_200() throws Exception {
-        ResponseDeleteDto responseDeleteDto = new ResponseDeleteDto("test@gmail.com", userStorages);
+        ResponseDeleteDto responseDeleteDto = new ResponseDeleteDto(3);
 
         when(userStorageService.delete(any())).thenReturn(responseDeleteDto);
 
@@ -121,9 +121,7 @@ public class UserStorageControllerTest extends RestDocsTestSupport {
                                         fieldWithPath("request[].id").description("삭제할 유저스토리지 id")
                                 ),
                                 responseFields(
-                                        fieldWithPath("memberEmail").description("삭제 요청한 유저 email"),
-                                        fieldWithPath("response[].id").description("삭제한 유저스토리지 id"),
-                                        fieldWithPath("response[].ingredientName").description("재료 이름")
+                                        fieldWithPath("size").description("Delete 된 갯수")
                                 )
                         )
                 );

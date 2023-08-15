@@ -65,7 +65,7 @@ public class UserStorageService {
         Member member = getCurrentMember();
         List<UserStorage> userStorages = userStorageRepository.findByIdInAndMember(requestDto.getIds(), member);
         userStorages.forEach(BaseEntity::delete);
-        return new ResponseDeleteDto(member.getEmail().getEmail(), userStorages);
+        return new ResponseDeleteDto(userStorages.size());
     }
 
     public ResponseGetDto get() {
