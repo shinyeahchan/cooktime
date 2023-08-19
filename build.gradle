@@ -57,7 +57,9 @@ dependencies {
     //jwt
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 
-
+    //Google API
+    implementation 'com.google.api-client:google-api-client:2.2.0'
+    implementation 'com.google.api-client:google-api-client-servlet:2.2.0'
 }
 
 ext {
