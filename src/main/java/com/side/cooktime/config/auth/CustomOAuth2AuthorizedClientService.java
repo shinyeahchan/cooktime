@@ -78,36 +78,12 @@ public class CustomOAuth2AuthorizedClientService implements OAuth2UserService<OA
             String provider = userRequest.getClientRegistration().getRegistrationId(); // google
             String providerId = oAuth2User.getAttribute(userNameAttributeName);
 
-            ResponseEntity<Map> additionalResponse = new RestTemplate()
-                    .exchange("https://people.googleapis.com/v1/people/" + response.get(userNameAttributeName) + "?personFields=genders,birthdays",
-                            HttpMethod.GET,
-                            new HttpEntity<>(createHeaders(userRequest.getAccessToken().getTokenValue())),
-                            Map.class);
-
-            String gender = null;
-            List<Map<String, Object>> gendersList = (List<Map<String, Object>>) additionalResponse.getBody().get("genders");
-            if (gendersList != null && !gendersList.isEmpty()) {
-                gender = (String) gendersList.get(0).get("value");
-            }
-
-            String birthYear = null;
-            List<Map<String, Object>> birthdaysList = (List<Map<String, Object>>) additionalResponse.getBody().get("birthdays");
-            if (birthdaysList != null && !birthdaysList.isEmpty()) {
-                Map<String, Object> dateMap = (Map<String, Object>) birthdaysList.get(0).get("date");
-                if (dateMap != null) {
-                    birthYear = String.valueOf(dateMap.get("year"));
-                }
-            }
-            int currentYear = LocalDate.now().getYear();
-            int age = currentYear - Integer.parseInt(birthYear);
-
-            user = new User(provider, providerId, email, "pass_word", given_name, family_name, gender, age);
+            user = new User(provider, providerId, email, "pass_word", given_name, family_name);
             memberRepository.save(user);
             sessionUser = new SessionUser(email, given_name, family_name);
         }
 
         httpSession.setAttribute("user", sessionUser);
-
 
         OAuth2AccessToken accessToken = userRequest.getAccessToken();
         String accessTokenValue = accessToken.getTokenValue();
