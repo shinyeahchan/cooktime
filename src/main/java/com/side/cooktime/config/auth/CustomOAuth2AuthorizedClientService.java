@@ -2,6 +2,7 @@ package com.side.cooktime.config.auth;
 
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.member.model.User;
+import com.side.cooktime.domain.member.model.UserGoogleInfo;
 import com.side.cooktime.domain.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.log4j.Log4j2;
@@ -78,7 +79,9 @@ public class CustomOAuth2AuthorizedClientService implements OAuth2UserService<OA
             String provider = userRequest.getClientRegistration().getRegistrationId(); // google
             String providerId = oAuth2User.getAttribute(userNameAttributeName);
 
-            user = new User(provider, providerId, email, "pass_word", given_name, family_name);
+            UserGoogleInfo userGoogleInfo = new UserGoogleInfo(providerId, null, null);
+
+            user = new User(userGoogleInfo, email, given_name, family_name);
             memberRepository.save(user);
             sessionUser = new SessionUser(email, given_name, family_name);
         }

@@ -3,9 +3,12 @@ package com.side.cooktime.domain.member.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.side.cooktime.config.auth.SessionUser;
 import com.side.cooktime.domain.member.model.Member;
-import com.side.cooktime.domain.member.model.dto.GoogleUserInfo;
+import com.side.cooktime.domain.member.model.User;
+import com.side.cooktime.domain.member.model.dto.GoogleUserDto;
 import com.side.cooktime.domain.member.repository.MemberRepository;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -42,39 +45,45 @@ public class GoogleService {
 
     private final MemberRepository memberRepository;
 
+    private final HttpSession httpSession;
+
     public String login(String authorizationCode) throws JsonProcessingException {
         log.info("## [REQUEST] authorizationCode : {}", authorizationCode);
         String accessToken = getGoogleAccessToken(authorizationCode);
-        GoogleUserInfo googleUserInfo = getGoogleUserInfo(accessToken);
+        GoogleUserDto googleUserDto = getGoogleUser(accessToken);
 
-        Optional<Member> optionalMember = memberRepository.findByEmail(googleUserInfo.getEmail());
+        Optional<Member> optionalMember = memberRepository.findByEmail(googleUserDto.getEmail());
 
         if (optionalMember.isEmpty()) {
             //TODO
-            log.info("회원가입 진행 및 JWT Response");
-            String provider = "google";
-            String providerId = googleUserInfo.getId();
+            log.info("회원가입 진행");
+            User user = googleUserDto.toUserEntity();
+            memberRepository.save(user);
 
+            SessionUser sessionUser = new SessionUser(user);
+            httpSession.setAttribute("user", sessionUser);
+
+            log.info("JWT Response");
         } else {
             //TODO
             log.info("JWT Response");
         }
 
-        return googleUserInfo.getEmail();
+        return googleUserDto.getEmail();
     }
 
-    private GoogleUserInfo getGoogleUserInfo(String accessToken) {
+    private GoogleUserDto getGoogleUser(String accessToken) {
         URI uri = URI.create(USER_INFO_URL + "?access_token=" + accessToken);
         RestTemplate restTemplate = new RestTemplate();
-        GoogleUserInfo googleUserInfo = null;
+        GoogleUserDto googleUserDto = null;
         try {
-            googleUserInfo = restTemplate.getForObject(uri, GoogleUserInfo.class);
+            googleUserDto = restTemplate.getForObject(uri, GoogleUserDto.class);
         } catch (HttpClientErrorException e) {
             //TODO: 예외처리
             log.error("API 요청 실패 / URI : {} / StatusCode : {} / ResponseBody : {}", USER_INFO_URL, e.getStatusCode(), e.getResponseBodyAsString());
         }
-        log.info("GoogleUserInfo : {}", googleUserInfo);
-        return googleUserInfo;
+        log.info("GoogleUserInfo : {}", googleUserDto);
+        return googleUserDto;
     }
 
 
