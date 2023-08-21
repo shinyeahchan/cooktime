@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "userGoogleInfo")
 public class UserGoogleInfo extends BaseEntity {
+    @Enumerated(EnumType.STRING)
     @Column
-    private String provider = "google";
+    private final Provider provider = Provider.GOOGLE;
     @Column
     private String providerId;
     @Column
@@ -27,5 +28,16 @@ public class UserGoogleInfo extends BaseEntity {
         this.providerId = providerId;
         this.picture = picture;
         this.locale = locale;
+    }
+
+    public UserGoogleInfo(String providerId, String picture, String locale, User user) {
+        this.providerId = providerId;
+        this.picture = picture;
+        this.locale = locale;
+        this.user = user;
+    }
+
+    public UserGoogleInfo withUser(User user) {
+        return new UserGoogleInfo(providerId, picture, locale, user);
     }
 }

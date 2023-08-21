@@ -55,7 +55,6 @@ public class GoogleService {
         Optional<Member> optionalMember = memberRepository.findByEmail(googleUserDto.getEmail());
 
         if (optionalMember.isEmpty()) {
-            //TODO
             log.info("회원가입 진행");
             User user = googleUserDto.toUserEntity();
             memberRepository.save(user);
@@ -63,9 +62,9 @@ public class GoogleService {
             SessionUser sessionUser = new SessionUser(user);
             httpSession.setAttribute("user", sessionUser);
 
+            //TODO
             log.info("JWT Response");
         } else {
-            //TODO
             log.info("JWT Response");
         }
 

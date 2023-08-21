@@ -13,14 +13,10 @@ public class User extends Member {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private UserGoogleInfo userGoogleInfo;
 
-    public User(final String email, final String password, final String firstName, final String lastName) {
-        super(Role.USER, email, password, firstName, lastName);
-    }
-
     //Google
     public User(final UserGoogleInfo userGoogleInfo, final String email, final String givenName, final String familyName) {
         super(Role.USER, email, "Google_Sign_Up", givenName, familyName);
-        this.userGoogleInfo = userGoogleInfo;
+        this.userGoogleInfo = userGoogleInfo.withUser(this);
     }
 
     protected User() {
