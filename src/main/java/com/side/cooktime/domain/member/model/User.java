@@ -1,13 +1,11 @@
 package com.side.cooktime.domain.member.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
 @Getter
+@DiscriminatorValue("USER")
 public class User extends Member {
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

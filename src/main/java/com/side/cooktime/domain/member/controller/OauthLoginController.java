@@ -3,22 +3,23 @@ package com.side.cooktime.domain.member.controller;
 import com.side.cooktime.domain.member.service.GoogleService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Log4j2
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class OauthLoginController {
     private final GoogleService googleService;
-
-    public OauthLoginController(GoogleService googleService) {
-        this.googleService = googleService;
-    }
 
     //임시
     //https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=595159133596-ibjnkksdef8bumsndm9vjn0cd4790jtr.apps.googleusercontent.com&scope=email%20profile&redirect_uri=http://localhost/api/v1/callback
