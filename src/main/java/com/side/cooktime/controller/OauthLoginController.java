@@ -1,4 +1,4 @@
-package com.side.cooktime.domain.member.controller;
+package com.side.cooktime.controller;
 
 import com.side.cooktime.domain.member.service.GoogleService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;

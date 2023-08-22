@@ -14,7 +14,7 @@ public class SessionUser implements Serializable {
 
     public SessionUser(User user) {
         this.id = user.getId();
-        this.email = user.getEmail().getEmail();
+        this.email = user.getEmailValue();
         this.name = user.getFullName().toString();
         this.picture = user.getUserGoogleInfo().getPicture();
     }

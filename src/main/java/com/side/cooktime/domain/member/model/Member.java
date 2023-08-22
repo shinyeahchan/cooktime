@@ -48,4 +48,8 @@ public abstract class Member extends BaseEntity {
     protected Member() {
         ;
     }
+
+    public String getEmailValue() {
+        return email.getEmail();
+    }
 }
