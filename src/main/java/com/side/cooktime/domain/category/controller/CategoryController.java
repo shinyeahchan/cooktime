@@ -1,6 +1,7 @@
 package com.side.cooktime.domain.category.controller;
 
 
+import com.side.cooktime.domain.category.model.Categories;
 import com.side.cooktime.domain.category.model.Category;
 import com.side.cooktime.domain.ingredient.model.Ingredients;
 import com.side.cooktime.domain.category.model.dto.request.RequestSaveDto;
@@ -32,10 +33,9 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public ResponseEntity<ResponseGetAllDto> getAll(){
-        List<Category> =
-        ResponseGetAllDto responseDto = new
-        return new REsponseEntity<>(responseDto, HttpStatus.OK);
+    public ResponseEntity<List<ResponseGetAllDto>> getAll(){
+        Categories categories = categoryService.getAll();
+        return new ResponseEntity<>(categories.toDtos(ResponseGetAllDto::new), HttpStatus.OK);
     }
 
     @Transactional

@@ -2,12 +2,15 @@ package com.side.cooktime.domain.category.service;
 
 import com.side.cooktime.domain.category.exception.CategoryErrorCode;
 import com.side.cooktime.domain.category.exception.CategoryException;
+import com.side.cooktime.domain.category.model.Categories;
 import com.side.cooktime.domain.category.model.Category;
 import com.side.cooktime.domain.ingredient.model.Ingredients;
 import com.side.cooktime.domain.category.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -33,5 +36,10 @@ public class CategoryService {
 
     public void delete(Long categoryId) {
         categoryRepository.deleteById(categoryId);
+    }
+
+    public Categories getAll() {
+        List<Category> categories = categoryRepository.findAll();
+        return new Categories(categories);
     }
 }

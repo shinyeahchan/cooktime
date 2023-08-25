@@ -43,4 +43,8 @@ public class Category extends BaseEntity {
     public void removeIngredient(Ingredient ingredient) {
         ingredients.remove(ingredient);
     }
+
+    public String getName(){
+        return name.getName();
+    }
 }
