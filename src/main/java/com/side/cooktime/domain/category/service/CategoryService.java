@@ -1,15 +1,13 @@
 package com.side.cooktime.domain.category.service;
 
+import com.side.cooktime.domain.category.exception.CategoryErrorCode;
+import com.side.cooktime.domain.category.exception.CategoryException;
 import com.side.cooktime.domain.category.model.Category;
-import com.side.cooktime.domain.category.model.Ingredients;
-import com.side.cooktime.domain.category.model.dto.response.ResponseFindIngredientsDto;
+import com.side.cooktime.domain.ingredient.model.Ingredients;
 import com.side.cooktime.domain.category.repository.CategoryRepository;
-import com.side.cooktime.domain.ingredient.model.Ingredient;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -24,7 +22,7 @@ public class CategoryService {
 
     @Transactional
     public Category findById(Long id) {
-        return categoryRepository.findById(id).orElse(null);
+        return categoryRepository.findById(id).orElseThrow(() -> new CategoryException(CategoryErrorCode.USER_NOT_FOUND));
     }
 
     @Transactional

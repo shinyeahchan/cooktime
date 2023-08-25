@@ -2,10 +2,11 @@ package com.side.cooktime.domain.category.controller;
 
 
 import com.side.cooktime.domain.category.model.Category;
-import com.side.cooktime.domain.category.model.Ingredients;
+import com.side.cooktime.domain.ingredient.model.Ingredients;
 import com.side.cooktime.domain.category.model.dto.request.RequestSaveDto;
 import com.side.cooktime.domain.category.model.dto.response.ResponseDeleteDto;
 import com.side.cooktime.domain.category.model.dto.response.ResponseFindIngredientsDto;
+import com.side.cooktime.domain.category.model.dto.response.ResponseGetAllDto;
 import com.side.cooktime.domain.category.model.dto.response.ResponseSaveDto;
 import com.side.cooktime.domain.category.service.CategoryService;
 import jakarta.transaction.Transactional;
@@ -28,6 +29,13 @@ public class CategoryController {
         Category category = categoryService.save(requestDto.toEntity());
         ResponseSaveDto responseDto = new ResponseSaveDto(1);
         return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/categories")
+    public ResponseEntity<ResponseGetAllDto> getAll(){
+        List<Category> =
+        ResponseGetAllDto responseDto = new
+        return new REsponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     @Transactional
