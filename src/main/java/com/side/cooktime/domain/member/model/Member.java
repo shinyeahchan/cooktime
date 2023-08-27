@@ -52,4 +52,8 @@ public abstract class Member extends BaseEntity {
     public String getEmailValue() {
         return email.getEmail();
     }
+
+    public String getFullName() {
+        return fullName.toString();
+    }
 }
