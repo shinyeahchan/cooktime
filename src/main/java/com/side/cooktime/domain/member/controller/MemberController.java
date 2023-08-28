@@ -35,6 +35,8 @@ public class MemberController {
         return "Not Member (" + memberEmail + ")";
     }
 
+    //TODO: 아래는 권한 확인용... 삭제 예정
+    
     @ResponseBody
     @GetMapping(value = "/member/me")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
