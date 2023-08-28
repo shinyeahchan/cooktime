@@ -24,8 +24,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String userEmail) {
-        System.out.println("loadUserByUsername");
-        System.out.println("username : " + userEmail);
         return memberRepository.findByEmail(userEmail)
                 .map(member -> createUser(userEmail, member))
                 .orElseThrow(() -> new UsernameNotFoundException(userEmail + " -> 데이터베이스에서 찾을 수 없습니다."));
