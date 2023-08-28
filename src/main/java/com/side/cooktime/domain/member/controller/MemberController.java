@@ -7,11 +7,10 @@ import com.side.cooktime.domain.member.model.User;
 import com.side.cooktime.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @Controller
@@ -33,6 +32,43 @@ public class MemberController {
             return Role.ADMIN.name();
         }
 
-        return "Not Member ("+memberEmail+")";
+        return "Not Member (" + memberEmail + ")";
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/member/me")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    public String getMemberMine(Authentication authentication) {
+        log.info("getMemberMine");
+        log.info("my Email : {}", authentication.getName());
+        Member member = memberService.findByEmail(authentication.getName());
+
+        if (member instanceof User) {
+            return Role.USER.name();
+        }
+        if (member instanceof Admin) {
+            return Role.ADMIN.name();
+        }
+
+        return "Not Member (" + authentication.getName() + ")";
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/member/{memberEmail}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String getMember(Authentication authentication, @PathVariable("memberEmail") String memberEmail) {
+        log.info("getMember");
+        log.info("my Email : {}", authentication.getName());
+        log.info("memberEmail : {}", memberEmail);
+        Member member = memberService.findByEmail(memberEmail);
+
+        if (member instanceof User) {
+            return Role.USER.name();
+        }
+        if (member instanceof Admin) {
+            return Role.ADMIN.name();
+        }
+
+        return "Not Member (" + memberEmail + ")";
     }
 }
