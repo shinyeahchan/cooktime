@@ -1,7 +1,7 @@
 package com.side.cooktime.global.controller;
 
-import com.side.cooktime.config.auth.LoginResponse;
-import com.side.cooktime.global.jwt.JwtFilter;
+import com.side.cooktime.global.config.auth.LoginResponse;
+import com.side.cooktime.global.config.auth.jwt.JwtFilter;
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.member.service.GoogleService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +31,7 @@ public class OauthLoginController {
     //서버 확인용
     //https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=595159133596-ibjnkksdef8bumsndm9vjn0cd4790jtr.apps.googleusercontent.com&scope=email%20profile&redirect_uri=http://localhost/api/v1/callback
     //https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=595159133596-ibjnkksdef8bumsndm9vjn0cd4790jtr.apps.googleusercontent.com&scope=email%20profile&redirect_uri=http://ec2-43-202-30-201.ap-northeast-2.compute.amazonaws.com/api/v1/callback
+
     @GetMapping(value = "/callback")
     public ResponseEntity<LoginResponse> GoogleSignCallback(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String code = request.getParameter("code");
