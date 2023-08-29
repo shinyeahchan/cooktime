@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.side.cooktime.config.auth.LoginResponse;
-import com.side.cooktime.config.auth.jwt.TokenProvider;
+import com.side.cooktime.global.jwt.TokenProvider;
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.member.model.User;
 import com.side.cooktime.domain.member.model.dto.GoogleUserDto;

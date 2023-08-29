@@ -1,7 +1,7 @@
-package com.side.cooktime.controller;
+package com.side.cooktime.global.controller;
 
 import com.side.cooktime.config.auth.LoginResponse;
-import com.side.cooktime.config.auth.jwt.JwtFilter;
+import com.side.cooktime.global.jwt.JwtFilter;
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.member.service.GoogleService;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package com.side.cooktime.config.auth.jwt;
+package com.side.cooktime.global.jwt;
 
 import com.side.cooktime.config.auth.CustomUserDetails;
 import jakarta.servlet.FilterChain;
