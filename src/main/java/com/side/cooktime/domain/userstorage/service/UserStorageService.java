@@ -20,6 +20,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class UserStorageService {
     private final UserStorageRepository userStorageRepository;
     private final MemberService memberService;
     private final IngredientService ingredientService;
+
+    private final long WARNING_INDEX_DAY = 5;
 
     public List<UserStorage> save(RequestSaveDto requestDto) {
         Member member = memberService.getCurrentMember();
@@ -60,8 +63,8 @@ public class UserStorageService {
     }
 
     public UserStorages get() {
-        Member member = memberService.getCurrentMember();
-        List<UserStorage> userStorages = userStorageRepository.findAllByMemberAndDeletedAtIsNull(member);
+        Member currentMember = memberService.getCurrentMember();
+        List<UserStorage> userStorages = userStorageRepository.findAllByMemberAndDeletedAtIsNull(currentMember);
         return new UserStorages(userStorages);
     }
 
@@ -74,6 +77,13 @@ public class UserStorageService {
     public UserStorages findStorages(String type) {
         Member member = memberService.getCurrentMember();
         List<UserStorage> userStorages = userStorageRepository.findByMemberAndStorageType(member, StorageType.find(type));
+        return new UserStorages(userStorages);
+    }
+
+    public UserStorages getWarned() {
+        Member currentMember = memberService.getCurrentMember();
+        LocalDate indexDate = LocalDate.now().plusDays(WARNING_INDEX_DAY);
+        List<UserStorage> userStorages = userStorageRepository.findAllByMemberAndDeletedAtIsNullAndExpirationDateBefore(currentMember, indexDate);
         return new UserStorages(userStorages);
     }
 }
