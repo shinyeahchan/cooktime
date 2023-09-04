@@ -5,6 +5,7 @@ import com.side.cooktime.domain.ingredient.model.StorageType;
 import com.side.cooktime.domain.ingredient.service.IngredientService;
 import com.side.cooktime.domain.member.model.Member;
 import com.side.cooktime.domain.member.service.MemberService;
+import com.side.cooktime.domain.userstorage.model.dto.response.ResponseGetNearExpiryDto;
 import com.side.cooktime.global.model.BaseEntity;
 import com.side.cooktime.domain.userstorage.model.UserStorage;
 import com.side.cooktime.domain.userstorage.model.UserStorages;
@@ -80,10 +81,11 @@ public class UserStorageService {
         return new UserStorages(userStorages);
     }
 
-    public UserStorages getWarned() {
+    public List<ResponseGetNearExpiryDto> getNearExpiry() {
         Member currentMember = memberService.getCurrentMember();
         LocalDate indexDate = LocalDate.now().plusDays(WARNING_INDEX_DAY);
         List<UserStorage> userStorages = userStorageRepository.findAllByMemberAndDeletedAtIsNullAndExpirationDateBefore(currentMember, indexDate);
-        return new UserStorages(userStorages);
+        UserStorages findNearExpiryUserStorages = new UserStorages(userStorages);
+        return findNearExpiryUserStorages.toDtos(ResponseGetNearExpiryDto::new);
     }
 }

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Getter
-public class ResponseGetWarnedDto {
+public class ResponseGetNearExpiryDto {
     private final Long id;
     private final String ingredientName;
     private final String ingredientImageUrl;
@@ -16,7 +16,7 @@ public class ResponseGetWarnedDto {
     private final int remainDays;
     private final String expireStatus;
 
-    public ResponseGetWarnedDto(UserStorage userStorage) {
+    public ResponseGetNearExpiryDto(UserStorage userStorage) {
         this.id = userStorage.getId();
 
         Ingredient ingredient = userStorage.getIngredient();

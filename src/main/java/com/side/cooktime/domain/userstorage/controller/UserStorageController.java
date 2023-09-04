@@ -53,9 +53,9 @@ public class UserStorageController {
         return new ResponseEntity<>(userStorages.toDtos(ResponseGetDto::new), HttpStatus.OK);
     }
 
-    @GetMapping("/storage/warning")
-    public ResponseEntity<List<ResponseGetWarnedDto>> getWarn(){
-     UserStorages userStorages = userStorageService.getWarned();
-     return new ResponseEntity<>(userStorages.toDtos(ResponseGetWarnedDto::new), HttpStatus.OK);
+    @GetMapping("/storage/near-expiry")
+    public ResponseEntity<List<ResponseGetNearExpiryDto>> getNearExpiry(){
+     List<ResponseGetNearExpiryDto> responseDtoList = userStorageService.getNearExpiry();
+     return new ResponseEntity<>(responseDtoList, HttpStatus.OK);
     }
 }
