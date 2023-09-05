@@ -56,4 +56,12 @@ public abstract class Member extends BaseEntity {
     public String getFullName() {
         return fullName.toString();
     }
+
+    public String getFirstName() {
+        return fullName.getFirstName();
+    }
+
+    public String getLastName() {
+        return fullName.getLastName();
+    }
 }
