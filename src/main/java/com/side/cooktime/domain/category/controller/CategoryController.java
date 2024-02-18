@@ -49,6 +49,7 @@ public class CategoryController {
         return new ResponseEntity<>(new ResponseDeleteDto(1), HttpStatus.OK);
     }
 
+    @Transactional
     @GetMapping("/category/all/ingredients")
     public ResponseEntity<List<ResponseGetAllWithIngredientsDto>> getAllWithIngredients() {
         Categories categories = categoryService.getAllWithIngredients();
