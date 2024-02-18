@@ -11,11 +11,11 @@ public class ResponseGetAllWithIngredientsDto {
     private Long id;
     private String name;
 
-    private List<ResponseFindIngredientsDto> ingredientsDto;
+    private List<ResponseFindIngredientsDto> ingredients;
 
-    public ResponseGetAllWithIngredientsDto(Category category, List<ResponseFindIngredientsDto> ingredientsDto){
+    public ResponseGetAllWithIngredientsDto(Category category, List<ResponseFindIngredientsDto> ingredients){
         this.id = category.getId();
         this.name = category.getName();
-        this.ingredientsDto = ingredientsDto;
+        this.ingredients = ingredients;
     }
 }
