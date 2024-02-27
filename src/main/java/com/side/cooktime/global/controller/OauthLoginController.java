@@ -60,10 +60,10 @@ public class OauthLoginController {
 
     @GetMapping("/login-cooktime000-get-token-for-test")
     @ResponseBody
-    public ResponseEntity<LoginResponse> get_cooktime000_token_for_test(String key){
+    public ResponseEntity<?> get_cooktime000_token_for_test(String key){
         if(!postmanTestSecretKey.equals(key)){
             log.error("포스트맨 테스트용 키가 다름");
-            return null;
+            return new ResponseEntity<>("포스트맨 테스트용 키가 다름", HttpStatus.BAD_REQUEST);
         }
         Member cooktime000 = googleService.loginForTest("cooktime000@gmail.com");
         LoginResponse loginResponse = googleService.getJwtResponse(cooktime000);
